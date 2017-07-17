@@ -97,7 +97,7 @@
 					});
 
 					it('should fire "change" event when input value changes', function(done) {
-						elem.addEventListener('change', function(e) {
+						elem.addEventListener('change', function() {
 							done();
 						});
 						var input = elem.$$('input');
