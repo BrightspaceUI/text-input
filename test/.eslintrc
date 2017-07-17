@@ -1,0 +1,11 @@
+{
+  "env": {
+    "mocha": true
+  },
+  "globals": {
+    "expect": true,
+    "fixture": true,
+    "MockInteractions": true,
+    "WCT": true
+  }
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<title>d2l-text-input test</title>
+		<script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+		<script src="../../web-component-tester/browser.js"></script>
+		<link rel="import" href="../../iron-test-helpers/mock-interactions.html">
+		<link rel="import" href="../d2l-text-input.html">
+	</head>
+	<body>
+		<test-fixture id="basic">
+			<template>
+				<d2l-text-input></d2l-text-input>
+			</template>
+		</test-fixture>
+		<test-fixture id="disabled">
+			<template>
+				<d2l-text-input disabled></d2l-text-input>
+			</template>
+		</test-fixture>
+		<script>
+			describe('d2l-text-input', function() {
+
+				var elem;
+
+				describe('basic', function() {
+
+					it('should instantiate the element', function() {
+						elem = fixture('basic');
+						expect(elem.is).to.equal('d2l-text-input');
+					});
+
+				});
+
+				describe('disabled', function() {
+
+					describe('disabled-false', function() {
+
+						beforeEach(function() {
+							elem = fixture('basic');
+						});
+
+						it('should default "disabled" to false', function() {
+							expect(elem.disabled).to.be.false;
+							expect(elem.hasAttribute('disabled')).to.be.false;
+							expect(elem.$$('input').disabled).to.be.false;
+						});
+
+						it('should reflect "disabled" property change to attribute and input', function() {
+							elem.disabled = true;
+							expect(elem.hasAttribute('disabled')).to.be.true;
+							expect(elem.$$('input').disabled).to.be.true;
+						});
+
+						it('should reflect "disabled" attribute change to property and input', function() {
+							elem.setAttribute('disabled', 'disabled');
+							expect(elem.disabled).to.be.true;
+							expect(elem.$$('input').disabled).to.be.true;
+						});
+
+					});
+
+					describe('disabled-true', function() {
+
+						beforeEach(function() {
+							elem = fixture('disabled');
+						});
+
+						it('should default "disabled" to true', function() {
+							expect(elem.disabled).to.be.true;
+							expect(elem.hasAttribute('disabled')).to.be.true;
+							expect(elem.$$('input').disabled).to.be.true;
+						});
+
+						it('should reflect "disabled" property change to attribute and input', function() {
+							elem.disabled = false;
+							expect(elem.hasAttribute('disabled')).to.be.false;
+							expect(elem.$$('input').disabled).to.be.false;
+						});
+
+						it('should reflect "disabled" attribute change to property and input', function() {
+							elem.removeAttribute('disabled');
+							expect(elem.disabled).to.be.false;
+							expect(elem.$$('input').disabled).to.be.false;
+						});
+
+					});
+
+				});
+
+				describe('value', function() {
+
+					beforeEach(function() {
+						elem = fixture('basic');
+					});
+
+					it('should fire "change" event when input value changes', function(done) {
+						elem.addEventListener('change', function(e) {
+							done();
+						});
+						var input = elem.$$('input');
+						input.dispatchEvent(new CustomEvent('change'));
+					});
+
+				});
+
+				describe('focus management', function() {
+
+					beforeEach(function() {
+						elem = fixture('basic');
+					});
+
+					it('should fire "focus" event when input element is focussed', function(done) {
+						elem.addEventListener('focus', function(e) {
+							expect(e.target).to.equal(elem);
+							done();
+						});
+						MockInteractions.focus(elem.$$('input'));
+					});
+
+					it('should fire "focus" event when custom element is focussed', function(done) {
+						elem.addEventListener('focus', function(e) {
+							expect(e.target).to.equal(elem);
+							done();
+						});
+						MockInteractions.focus(elem);
+					});
+
+				});
+
+			});
+		</script>
+	</body>
+</html>

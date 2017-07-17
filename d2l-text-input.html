@@ -1,0 +1,264 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<!--
+`d2l-text-input`
+Polymer-based web component for D2L text inputs
+
+@demo demo/index.html
+-->
+
+<dom-module id="d2l-text-input">
+	<template strip-whitespace>
+		<style>
+
+			:host {
+				display: inline-block;
+				width: 100%
+			}
+
+			input {
+				border-radius: 0.3rem;
+				border-style: solid;
+				box-sizing: border-box;
+				color: var(--d2l-color-ferrite);
+				display: inline-block;
+				font-family: inherit;
+				font-size: 0.95rem;
+				font-weight: 400;
+				height: auto;
+				letter-spacing: 0.01rem;
+				line-height: 1.4rem;
+				margin: 0;
+				min-width: calc(2rem + 1em);
+				transition-duration: 0.5s;
+				transition-timing-function: ease;
+				transition-property: background-color, border-color;
+				vertical-align: middle;
+				width: 100%;
+			}
+			input::placeholder {
+				color: var(--d2l-color-mica);
+			}
+			input,
+			input:hover:disabled {
+				background-color: #ffffff;
+				border-color: var(--d2l-color-mica);
+				border-width: 1px;
+				box-shadow: inset 0 2px 0 0 rgba(185, 194, 208, .2);
+				padding: 0.3rem 1rem;
+			}
+			input:hover,
+			input:focus,
+			input.d2l-text-input-focus {
+				border-color: var(--d2l-color-celestine);
+				border-width: 2px;
+				outline-width: 0;
+				padding: calc(0.3rem - 1px) calc(1rem - 1px);
+			}
+
+			input:disabled {
+				opacity: 0.5;
+			}
+
+			input:invalid,
+			input[aria-invlid='true'] {
+				border-color: var(--d2l-color-cinnabar);
+			}
+
+			input::-webkit-search-cancel-button {
+				display: none;
+			}
+			input::-ms-clear {
+				display: none;
+				width: 0;
+				height: 0;
+			}
+
+		</style>
+		<input
+			aria-invalid$="[[ariaInvalid]]"
+			aria-label$="[[ariaLabel]]"
+			aria-labelledby$="[[ariaLabelledby]]"
+			autofocus$="[[autofocus]]"
+			disabled$="[[disabled]]"
+			list$="[[list]]"
+			max$="[[max]]"
+			maxlength$="[[maxlength]]"
+			min$="[[min]]"
+			minlength$="[[minlength]]"
+			name$="[[name]]"
+			on-change="_handleChange"
+			pattern$="[[pattern]]"
+			placeholder$="[[placeholder]]"
+			readonly$="[[readonly]]"
+			required$="[[required]]"
+			size$="[[size]]"
+			step$="[[step]]"
+			tabindex$="[[tabIndex]]"
+			type$="[[type]]"
+			value$="[[value]]" />
+	</template>
+	<script>
+		Polymer({
+			is: 'd2l-text-input',
+			properties: {
+				/**
+				 * Fired when the input changes due to user interaction.
+				 *
+				 * @event change
+				*/
+
+				/**
+				 * Fired when the input receives focus.
+				 *
+				 * @event focus
+				*/
+
+				/**
+				 * Gets or sets the [aria-describedby attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-describedby_attribute),
+				 * which contains the IDs of the elements that describe the input.
+				 */
+				ariaDescribedby: {
+					type: String
+				},
+				/**
+				 * Gets or sets the [aria-invalid attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-invalid_attribute),
+				 * which is used to indicate that the value entered into the input field does not conform to the format expected.
+				 */
+				ariaInvalid: {
+					type: String
+				},
+				/**
+				 * Gets or sets the [aria-label](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-label_attribute)
+				 * attribute, which defines a string label for the input.
+				 */
+				ariaLabel: {
+					type: String
+				},
+				/**
+				 * Gets or sets the [aria-labelledby attribute](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Techniques/Using_the_aria-labelledby_attribute),
+				 * which contains the IDs of labels for the input.
+				 */
+				ariaLabelledby: {
+					type: String
+				},
+				/**
+				 * When true, will automatically focus on the input when the page loads.
+				 */
+				autofocus: {
+					type: Boolean,
+					value: false
+				},
+				/**
+				 * Gets or sets the disabled state of the input, `true` is disabled and `false` is enabled.
+				 */
+				disabled: {
+					type: Boolean,
+					reflectToAttribute: true,
+					value: false
+				},
+				/**
+				 * List of pre-defined options to suggest to the user. The value must be the id of a <datalist> element in the same document.
+				 */
+				list: {
+					type: String
+				},
+				/**
+				 * The maximum numeric value for this item, which must not be less than its minimum (min attribute) value.
+				 */
+				max: {
+					type: String
+				},
+				/**
+				 * Maximum number of characters that the user can enter.
+				 */
+				maxlength: {
+					type: Number
+				},
+				/**
+				 * The minimum numeric value for this item, which must not be greater than its maximum (max attribute) value.
+				 */
+				min: {
+					type: String
+				},
+				/**
+				 * Minimum number of characters that the user can enter.
+				 */
+				minlength: {
+					type: Number
+				},
+				/**
+				 * A regular expression that the control's value is checked against.
+				 */
+				pattern: {
+					type: String
+				},
+				/**
+				 * A hint to the user of what can be entered in the control.
+				 */
+				placeholder: {
+					type: String
+				},
+				/**
+				 * Indicates that the user cannot modify the value of the control.
+				 */
+				readonly: {
+					type: Boolean,
+					value: false
+				},
+				/**
+				 * Specifies that the user must fill in a value before submitting a form.
+				*/
+				required: {
+					type: Boolean,
+					value: false
+				},
+				/**
+				 * The initial size of the control as an integer number of characters.
+				*/
+				size: {
+					type: Number
+				},
+				/**
+				 * Works with the min and max attributes to limit the increments at which a numeric value can be set.
+				*/
+				step: {
+					type: String
+				},
+				/**
+				 * The name of the control, which is submitted with the form data.
+				 */
+				name: {
+					type: String
+				},
+				/**
+				 * Gets or sets the text input type, one of "text" (default), "number", "email", "password", "url".
+				 */
+				type: {
+					type: String
+				},
+				/**
+				 * Value of the input.
+				 */
+				value: {
+					type: String
+				}
+			},
+			focus: function() {
+				this.$$('input').focus();
+			},
+			_handleChange: function() {
+				// in shady DOM the input's "change" event will leak through,
+				// so no need to fire it
+				console.log('change');
+				if (Polymer.Element || Polymer.Settings.useShadow) {
+					this.dispatchEvent( new CustomEvent(
+						'change',
+						{bubbles: true, composed: false}
+					) );
+				}
+			}
+		});
+	</script>
+</dom-module>
