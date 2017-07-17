@@ -251,7 +251,6 @@ Polymer-based web component for D2L text inputs
 			_handleChange: function() {
 				// in shady DOM the input's "change" event will leak through,
 				// so no need to fire it
-				console.log('change');
 				if (Polymer.Element || Polymer.Settings.useShadow) {
 					this.dispatchEvent( new CustomEvent(
 						'change',
