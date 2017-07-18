@@ -42,7 +42,6 @@
 
 					it('should update value when bindValue changes', function() {
 						var textInput = elem.querySelector('d2l-text-input');
-						var input = textInput.$$('input');
 						elem.bindValue = 'hello';
 						expect(textInput.value).to.equal('hello');
 						expect(elem.bindValue).to.equal('hello');
