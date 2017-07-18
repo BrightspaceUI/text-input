@@ -101,7 +101,15 @@
 							done();
 						});
 						var input = elem.$$('input');
-						input.dispatchEvent(new CustomEvent('change'));
+						input.dispatchEvent(new Event('change', { bubbles: true, cancelable: false, composed: false }));
+					});
+
+					it('should fire "input" event when input value changes', function(done) {
+						elem.addEventListener('input', function() {
+							done();
+						});
+						var input = elem.$$('input');
+						input.dispatchEvent(new Event('input', { bubbles: true, cancelable: true, composed: true }));
 					});
 
 				});
