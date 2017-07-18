@@ -89,7 +89,6 @@ Polymer-based web component for D2L text inputs
 			minlength$="[[minlength]]"
 			name$="[[name]]"
 			on-change="_handleChange"
-			on-input="_handleInput"
 			on-focus="_handleFocus"
 			pattern$="[[pattern]]"
 			placeholder$="[[placeholder]]"
@@ -99,7 +98,7 @@ Polymer-based web component for D2L text inputs
 			step$="[[step]]"
 			tabindex$="[[tabIndex]]"
 			type$="[[type]]"
-			value$="[[value]]" />
+			value="{{value::input}}" />
 	</template>
 	<script>
 		Polymer({
@@ -257,9 +256,6 @@ Polymer-based web component for D2L text inputs
 						{bubbles: true, composed: false}
 					) );
 				}
-			},
-			_handleInput: function(e) {
-				this.value = this.$$('input').value;
 			},
 			_handleFocus: function() {
 				if (!Polymer.Element && !Polymer.Settings.useShadow) {
