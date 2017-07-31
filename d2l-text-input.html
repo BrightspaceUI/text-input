@@ -98,7 +98,7 @@ Polymer-based web component for D2L text inputs
 			step$="[[step]]"
 			tabindex$="[[tabIndex]]"
 			type$="[[type]]"
-			value$="[[value]]" />
+			value="{{value::input}}" />
 	</template>
 	<script>
 		Polymer({
@@ -243,14 +243,15 @@ Polymer-based web component for D2L text inputs
 				 * Value of the input.
 				 */
 				value: {
-					type: String
+					type: String,
+					notify: true
 				}
 			},
 			focus: function() {
 				this.$$('input').focus();
 			},
 			_handleChange: function() {
-				if (Polymer.Element || !Polymer.Settings.useShadow) {
+				if (Polymer.Element) {
 					this.dispatchEvent( new CustomEvent(
 						'change',
 						{bubbles: true, composed: false}
@@ -261,7 +262,7 @@ Polymer-based web component for D2L text inputs
 				if (!Polymer.Element && !Polymer.Settings.useShadow) {
 					this.dispatchEvent( new CustomEvent(
 						'focus',
-						{bubbles: true, composed: false}
+						{bubbles: false}
 					) );
 				}
 			}
