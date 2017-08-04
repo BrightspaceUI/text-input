@@ -77,4 +77,4 @@ npm test
 [bower-url]: http://bower.io/search/?q=d2l-text-input
 [bower-image]: https://badge.fury.io/bo/d2l-text-input.svg
 [ci-url]: https://travis-ci.org/BrightspaceUI/text-input
-[ci-image]: https://travis-ci.org/BrightspaceUI/text-input.svg
+[ci-image]: https://travis-ci.org/BrightspaceUI/text-input.svg?branch=master
