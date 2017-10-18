@@ -1,6 +1,8 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
 <link rel="import" href="../d2l-typography/d2l-typography-shared-styles.html">
+<link rel="import" href="d2l-text-input-shared-styles.html">
+
 <!--
 `d2l-text-input`
 Polymer-based web component for D2L text inputs
@@ -18,61 +20,36 @@ Polymer-based web component for D2L text inputs
 			}
 
 			input {
-				border-radius: 0.3rem;
-				border-style: solid;
-				box-sizing: border-box;
-				color: var(--d2l-color-ferrite);
-				display: inline-block;
 				font-family: inherit;
-				font-size: 0.95rem;
-				font-weight: 400;
-				height: auto;
-				letter-spacing: 0.01rem;
-				line-height: 1.4rem;
-				margin: 0;
-				min-width: calc(2rem + 1em);
-				transition-duration: 0.5s;
-				transition-timing-function: ease;
-				transition-property: background-color, border-color;
-				vertical-align: middle;
-				width: 100%;
+				@apply --d2l-input;
+				@apply --d2l-input-disabled-hover;
 			}
 			input::placeholder {
-				color: var(--d2l-color-mica);
+				@apply --d2l-input-placeholder;
 			}
-			input,
 			input:hover:disabled {
-				background-color: #ffffff;
-				border-color: var(--d2l-color-mica);
-				border-width: 1px;
-				box-shadow: inset 0 2px 0 0 rgba(185, 194, 208, .2);
-				padding: 0.3rem 1rem;
+				@apply --d2l-input-disabled-hover;
 			}
 			input:hover,
 			input:focus,
 			input.d2l-text-input-focus {
-				border-color: var(--d2l-color-celestine);
-				border-width: 2px;
-				outline-width: 0;
-				padding: calc(0.3rem - 1px) calc(1rem - 1px);
+				@apply --d2l-input-hover;
 			}
 
 			input:disabled {
-				opacity: 0.5;
+				@apply --d2l-input-disabled;
 			}
 
 			input:invalid,
 			input[aria-invalid='true'] {
-				border-color: var(--d2l-color-cinnabar);
+				@apply --d2l-input-invalid;
 			}
 
 			input::-webkit-search-cancel-button {
-				display: none;
+				@apply --d2l-input-webkit-search-cancel;
 			}
 			input::-ms-clear {
-				display: none;
-				width: 0;
-				height: 0;
+				@apply --d2l-input-ms-clear;
 			}
 
 		</style>
