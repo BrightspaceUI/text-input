@@ -4,12 +4,15 @@
   "main": "d2l-text-input.html",
   "license": "Apache-2.0",
   "ignore": [
+    "demo",
     "test",
     ".editorconfig",
-    ".eslintrc",
+    ".eslintrc.json",
     ".gitignore",
     ".travis.yml",
     "package.json",
+    "polymer.json",
+    "text-input.gif",
     "wct.conf.json"
   ],
   "dependencies": {
