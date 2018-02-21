@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../d2l-colors/d2l-colors.html">
+<link rel="import" href="../d2l-polymer-behaviors/d2l-focusable-behavior.html">
 <link rel="import" href="d2l-text-input-shared-styles.html">
 
 <!--
@@ -56,6 +57,7 @@ Polymer-based web component for D2L text inputs
 			aria-label$="[[ariaLabel]]"
 			aria-labelledby$="[[ariaLabelledby]]"
 			autofocus$="[[autofocus]]"
+			class="d2l-focusable"
 			disabled$="[[disabled]]"
 			list$="[[list]]"
 			max$="[[max]]"
@@ -78,6 +80,11 @@ Polymer-based web component for D2L text inputs
 	<script>
 		Polymer({
 			is: 'd2l-text-input',
+
+			behaviors: [
+				D2L.PolymerBehaviors.FocusableBehavior
+			],
+
 			properties: {
 				/**
 				 * Fired when the input changes due to user interaction.
@@ -222,11 +229,10 @@ Polymer-based web component for D2L text inputs
 					notify: true
 				}
 			},
-			focus: function() {
-				this.$$('input').focus();
-			},
 			_handleChange: function() {
 				if (Polymer.Element) {
+					// This custom focus event is only needed for Polymer 1. We should
+					// be able to remove this event once we move to Polymer 2.
 					this.dispatchEvent(new CustomEvent(
 						'change',
 						{bubbles: true, composed: false}
@@ -235,6 +241,8 @@ Polymer-based web component for D2L text inputs
 			},
 			_handleFocus: function() {
 				if (!Polymer.Element && !Polymer.Settings.useShadow) {
+					// This custom focus event is only needed for Polymer 1. We should
+					// be able to remove this event once we move to Polymer 2.
 					this.dispatchEvent(new CustomEvent(
 						'focus',
 						{bubbles: false}
