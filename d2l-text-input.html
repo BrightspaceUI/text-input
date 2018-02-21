@@ -227,18 +227,18 @@ Polymer-based web component for D2L text inputs
 			},
 			_handleChange: function() {
 				if (Polymer.Element) {
-					this.dispatchEvent( new CustomEvent(
+					this.dispatchEvent(new CustomEvent(
 						'change',
 						{bubbles: true, composed: false}
-					) );
+					));
 				}
 			},
 			_handleFocus: function() {
 				if (!Polymer.Element && !Polymer.Settings.useShadow) {
-					this.dispatchEvent( new CustomEvent(
+					this.dispatchEvent(new CustomEvent(
 						'focus',
 						{bubbles: false}
-					) );
+					));
 				}
 			}
 		});
