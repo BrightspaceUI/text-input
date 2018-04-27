@@ -66,7 +66,6 @@ Polymer-based web component for D2L text inputs
 			minlength$="[[minlength]]"
 			name$="[[name]]"
 			on-change="_handleChange"
-			on-focus="_handleFocus"
 			pattern$="[[pattern]]"
 			placeholder$="[[placeholder]]"
 			readonly$="[[readonly]]"
@@ -90,12 +89,6 @@ Polymer-based web component for D2L text inputs
 				 * Fired when the input changes due to user interaction.
 				 *
 				 * @event change
-				*/
-
-				/**
-				 * Fired when the input receives focus.
-				 *
-				 * @event focus
 				*/
 
 				/**
@@ -236,16 +229,6 @@ Polymer-based web component for D2L text inputs
 					this.dispatchEvent(new CustomEvent(
 						'change',
 						{bubbles: true, composed: false}
-					));
-				}
-			},
-			_handleFocus: function() {
-				if (!Polymer.Element && !Polymer.Settings.useShadow) {
-					// This custom focus event is only needed for Polymer 1. We should
-					// be able to remove this event once we move to Polymer 2.
-					this.dispatchEvent(new CustomEvent(
-						'focus',
-						{bubbles: false}
 					));
 				}
 			}
