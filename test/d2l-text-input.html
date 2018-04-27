@@ -122,30 +122,20 @@
 
 				});
 
-				describe('focus management', function() {
+				describe('focusable behavior', function() {
 
 					beforeEach(function() {
 						elem = fixture('basic');
 					});
 
-					it('should fire "focus" event when input element is focussed', function(done) {
-						elem.addEventListener('focus', function(e) {
-							expect(e.target).to.equal(elem);
-							done();
-						});
-						MockInteractions.focus(elem.$$('input'));
+					it('should give input element focusable class', function() {
+						expect(elem.$$('input').classList.contains('d2l-focusable'), 'missing d2l-focusable class').to.equal(true);
 					});
 
-					it('should fire "focus" event when custom element is focussed', function(done) {
-						elem.addEventListener('focus', function(e) {
-							expect(e.target).to.equal(elem);
-							done();
-						});
-						MockInteractions.focus(elem);
+					it('includes focusable behavior', function() {
+						expect(elem.behaviors).contains(D2L.PolymerBehaviors.FocusableBehavior);
 					});
-
 				});
-
 			});
 		</script>
 	</body>
