@@ -66,6 +66,7 @@ Polymer-based web component for D2L text inputs
 			minlength$="[[minlength]]"
 			name$="[[name]]"
 			on-change="_handleChange"
+			on-keypress="_handleKeypress"
 			pattern$="[[pattern]]"
 			placeholder$="[[placeholder]]"
 			readonly$="[[readonly]]"
@@ -177,6 +178,13 @@ Polymer-based web component for D2L text inputs
 					type: String
 				},
 				/**
+				 * Indicates that the form will not be submitted when the user presses enter within the input cell.
+				 */
+				preventSubmit: {
+					type: Boolean,
+					value: false,
+				},
+				/**
 				 * Indicates that the user cannot modify the value of the control.
 				 */
 				readonly: {
@@ -231,6 +239,13 @@ Polymer-based web component for D2L text inputs
 						{bubbles: true, composed: false}
 					));
 				}
+			},
+			_handleKeypress: function(e) {
+				if (this.preventSubmit && e.keyCode === 13) {
+					e.preventDefault();
+					return false;
+				}
+				return true;
 			}
 		});
 	</script>
