@@ -93,7 +93,7 @@ npm run test:lint
 To run unit tests locally using [Polymer test](https://www.polymer-project.org/2.0/docs/tools/polymer-cli-commands#tests):
 
 ```shell
-polymer test --skip-plugin sauce
+npm run test:polymer:local
 ```
 
 To lint AND run local unit tests:
