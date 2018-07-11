@@ -1,12 +1,18 @@
 language: node_js
-node_js:
-  - "9"
-script:
-- npm run test:lint
-- polymer test --skip-plugin local
+node_js: node
 addons:
-  jwt:
-    secure: T6iEU6ISSB/Sh6kz0y3KQzN7rfrB/KCUg79TsEykItaJmtpyaDfyIEsJH8FAf34mqXGLctTHnL20Wo+SFU9L1LDp7EVRfBTnFG8SeCBMtvZ2hjDDVLbI0eV5wocPY4cGKnikv1R2ZotJLGN2N2y4iY2liZ0kJb6e8Qi+dKRKrFVIixcdyof75qE75cJM5LaW1JB+PICocGs8PsQxpV0KmsHbw9HSx0K7WoAT/hMxAzPPqTAtYK5c2Y9Gqgk+wskYnozP9/BqRbJazHP4V9kRACYAgZHfa8Es3jqiy0pTOV5uSR3y4eR8KdI9/ihHRO1m3YyfBatovEf+bOTulRmHZuG7yBeU9vRkXupucysDYYWnmpP93Wq560DZZrmdsi1dze5686dLo0RbB/v0pRxI3/kVNRahnd/gFLEdfIZuf9Lo0uWFZRZprnBG4Nmu5Pzaakld/Znq8J9RroT2JKyPFtHpkrfddtpiZ04kzCKngbXhSWx9badoO6Ku+g58Fkl7Qf4kB0nQ/Bi42Sii5HnEj2Xw0ju9SjT8V8D+r/0PmV36XPe7CfbAoWg1dZKkUrARDht2e0j/AO29scq8paeqp29cEze7U3gYGwcfyJdSKLyVhK9Z9CUTxxR4qMTJHvtZrnsgSqP/aXTe4AHE29CbWKORY/1oz+o+HOLen3M0wfc=
+  chrome: stable
+script:
+- npm run lint
+- |
+  if [ $TRAVIS_PULL_REQUEST != false ] && [ $TRAVIS_SECURE_ENV_VARS == true ]; then
+    echo "Pull request with secure environment variables, running Sauce tests...";
+    npm run test:polymer:sauce || travis_terminate 1;
+  else
+    echo "Not a pull request and/or no secure environment variables, running headless tests...";
+    npm run test:polymer:local || travis_terminate 1;
+  fi
 env:
   global:
-    SAUCE_USERNAME: Desire2Learn
+  - SAUCE_USERNAME: Desire2Learn
+  - secure: ZxQwPqWAXyv5D4APyVpzY/b9X1jVvNi6j02hhCnb1MRv8RPzBbzkFJQ0DhtjVLFdw/77G3Z4r2adxjcP6LtfecGV2aSPNoxbhSH53i12zINidtN5jLBOA5hcxkOsDKgm09sGgJN1adA0zFZ4RGLJwrnMfAVD2pZKBAqKOCBqvmQYUt6lZUx6KDAuLJLfplCrCPIhwbT+QtJjhf/9P1asXRVEc6Rr7cDafZJl3wWLHQOHnDvPQjNVtFWI/Kqnc+NQti/6rdiiocCC/8pdBOEjFUQGNCRKv0LYeG8WxhYZd0fjynLviPRBAdVUq6J7d0qgJJBli6fc+JychgO7b45XeWA1gCyzwEv1ilN4la2C5IzJ8CpfSXhnmNbkfb5t0nhhZDhT+V/kzVvnmLtZAFnL8qa7KI4JTBzgpRK9kFf/9QGEmHOh8xDYpKmkQgGCKkACnVIVvR07gOkVe/Kh98AXqwn8gDTNCDySbHXU3GO4zIRC2uB1j8Z1hC21l6I7rwocSf3U8NM3i59DXrnOhNWJNxOrZgY9HqNkz5npL7hiJWMoFHqHHtGrWc/5DxLtXt3pJ2EpVJrbsvUCjtam3XousK98pNqXf8Ktz3fVod3hm+3PEeaqPJssdoo+eeymfw/B8YxZMIidJotUKn9tAbOTSuYpo4WcNlXqsNYm/ESbjgw=
