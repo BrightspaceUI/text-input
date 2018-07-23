@@ -1,68 +1,71 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-        <title>d2l-text-input test</title>
-        <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-        <script src="../../web-component-tester/browser.js"></script>
-        <link rel="import" href="../../iron-test-helpers/mock-interactions.html">
-        <link rel="import" href="../../iron-input/iron-input.html">
-        <link rel="import" href="../d2l-text-input.html">
-    </head>
-    <body>
-        <test-fixture id="integration">
-            <template>
-                <iron-input><d2l-text-input></d2l-text-input></iron-input>
-            </template>
-        </test-fixture>
-        <script>
-            describe('iron-input d2l-text-input integration', function() {
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<title>d2l-text-input test</title>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script src="../../wct-browser-legacy/browser.js"></script>
+		<script type="module" src="../../@polymer/iron-test-helpers/mock-interactions.js"></script>
+		<script type="module" src="../../@polymer/iron-input/iron-input.js"></script>
+		<script type="module" src="../d2l-text-input.js"></script>
+	</head>
+	<body>
+		<test-fixture id="integration">
+			<template>
+				<iron-input><d2l-text-input></d2l-text-input></iron-input>
+			</template>
+		</test-fixture>
+		<script type="module">
+import '../../@polymer/iron-test-helpers/mock-interactions.js';
+import '../../@polymer/iron-input/iron-input.js';
+import '../d2l-text-input.js';
+describe('iron-input d2l-text-input integration', function() {
 
-                var elem;
+	var elem;
 
-                beforeEach(function(done) {
-                    elem = fixture('integration');
-                    if (elem.inputElement) {
-                        done();
-                    } else {
-                        elem.addEventListener('iron-input-ready', function() {
-                            done();
-                        });
-                    }
-                });
+	beforeEach(function(done) {
+		elem = fixture('integration');
+		if (elem.inputElement) {
+			done();
+		} else {
+			elem.addEventListener('iron-input-ready', function() {
+				done();
+			});
+		}
+	});
 
-                describe('basic', function() {
-                    it('should set inputElement', function() {
-                        expect(elem.inputElement).to.equal(elem.querySelector('d2l-text-input'));
-                    });
-                });
+	describe('basic', function() {
+		it('should set inputElement', function() {
+			expect(elem.inputElement).to.equal(elem.querySelector('d2l-text-input'));
+		});
+	});
 
-                describe('value', function() {
+	describe('value', function() {
 
-                    it('should update value when bindValue changes', function() {
-                        var textInput = elem.querySelector('d2l-text-input');
-                        elem.bindValue = 'hello';
-                        expect(textInput.value).to.equal('hello');
-                        expect(elem.bindValue).to.equal('hello');
-                    });
+		it('should update value when bindValue changes', function() {
+			var textInput = elem.querySelector('d2l-text-input');
+			elem.bindValue = 'hello';
+			expect(textInput.value).to.equal('hello');
+			expect(elem.bindValue).to.equal('hello');
+		});
 
-                    it('should update bindValue when input value changes', function(done) {
-                        var textInput = elem.querySelector('d2l-text-input');
-                        var input = textInput.$$('input');
+		it('should update bindValue when input value changes', function(done) {
+			var textInput = elem.querySelector('d2l-text-input');
+			var input = textInput.$$('input');
 
-                        elem.addEventListener('bind-value-changed', function() {
-                            expect(textInput.value).to.equal('hello');
-                            expect(elem.bindValue).to.equal('hello');
-                            done();
-                        });
-                        input.value = 'hello';
-                        input.dispatchEvent(new Event('input', { bubbles: true, cancelable: true, composed: true }));
-                    });
+			elem.addEventListener('bind-value-changed', function() {
+				expect(textInput.value).to.equal('hello');
+				expect(elem.bindValue).to.equal('hello');
+				done();
+			});
+			input.value = 'hello';
+			input.dispatchEvent(new Event('input', { bubbles: true, cancelable: true, composed: true }));
+		});
 
-                });
+	});
 
-            });
-        </script>
-    </body>
+});
+</script>
+	</body>
 </html>

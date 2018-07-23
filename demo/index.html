@@ -1,55 +1,69 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-        <title>d2l-text-input demo</title>
-        <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-        <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-        <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-        <link rel="import" href="../../d2l-typography/d2l-typography.html">
-        <link rel="import" href="../d2l-text-input.html">
-        <custom-style>
-            <style is="custom-style" include="demo-pages-shared-styles"></style>
-        </custom-style>
-        <custom-style include="d2l-typography">
-            <style is="custom-style" include="d2l-typography"></style>
-        </custom-style>
-        <style>
-        html {
-            font-size: 20px;
-        }
-        </style>
-    </head>
-    <body unresolved class="d2l-typography">
-        <div class="vertical-section-container centered">
-            <h3>Simple</h3>
-            <demo-snippet>
-                <template>
-                    <d2l-text-input></d2l-text-input>
-                </template>
-            </demo-snippet>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+		<title>d2l-text-input demo</title>
+		<script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js"></script>
+		<script type="module" src="../../@polymer/iron-demo-helpers/demo-snippet.js"></script>
+		<script type="module" src="../../d2l-typography/d2l-typography.js"></script>
+		<script type="module" src="../d2l-text-input.js"></script>
+		<!-- FIXME(polymer-modulizer):
+		These imperative modules that innerHTML your HTML are
+		a hacky way to be sure that any mixins in included style
+		modules are ready before any elements that reference them are
+		instantiated, otherwise the CSS @apply mixin polyfill won't be
+		able to expand the underlying CSS custom properties.
+		See: https://github.com/Polymer/polymer-modulizer/issues/154
+		-->
+	<script type="module">
+const $_documentContainer = document.createElement('template');
 
-            <h3>Disabled</h3>
-            <demo-snippet>
-                <template>
-                    <d2l-text-input disabled></d2l-text-input>
-                </template>
-            </demo-snippet>
+$_documentContainer.innerHTML = `<custom-style>
+			<style is="custom-style" include="demo-pages-shared-styles"></style>
+		</custom-style>
+		<custom-style include="d2l-typography">
+			<style is="custom-style" include="d2l-typography"></style>
+		</custom-style>`;
 
-            <h3>Placeholder</h3>
-            <demo-snippet>
-                <template>
-                    <d2l-text-input placeholder="enter some text"></d2l-text-input>
-                </template>
-            </demo-snippet>
+document.body.appendChild($_documentContainer.content);
+</script>
+		<style>
+		html {
+			font-size: 20px;
+		}
+		</style>
+	</head>
+	<body unresolved class="d2l-typography">
+		<div class="vertical-section-container centered">
+			<h3>Simple</h3>
+			<demo-snippet>
+				<template>
+					<d2l-text-input></d2l-text-input>
+				</template>
+			</demo-snippet>
 
-            <h3>Invalid</h3>
-            <demo-snippet>
-                <template>
-                    <d2l-text-input type="email" value="foo@"></d2l-text-input>
-                </template>
-            </demo-snippet>
-        </div>
-    </body>
+			<h3>Disabled</h3>
+			<demo-snippet>
+				<template>
+					<d2l-text-input disabled=""></d2l-text-input>
+				</template>
+			</demo-snippet>
+
+			<h3>Placeholder</h3>
+			<demo-snippet>
+				<template>
+					<d2l-text-input placeholder="enter some text"></d2l-text-input>
+				</template>
+			</demo-snippet>
+
+			<h3>Invalid</h3>
+			<demo-snippet>
+				<template>
+					<d2l-text-input type="email" value="foo@"></d2l-text-input>
+				</template>
+			</demo-snippet>
+		</div>
+	</body>
 </html>
