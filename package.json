@@ -1,15 +1,18 @@
 {
   "description": "Polymer-based web component for D2L text inputs",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/BrightspaceUI/text-input.git"
   },
   "name": "d2l-text-input",
   "scripts": {
-    "test:lint:html": "eslint *.html demo/*.html test/*.html",
-    "test:lint:wc": "polymer lint --npm *.js",
-    "test:lint": "npm run test:lint:html && npm run test:lint:wc",
-    "test": "npm run test:lint && polymer test --npm --skip-plugin sauce"
+    "lint:html": "eslint *.js *.html demo/*.html test/*.html",
+    "lint:wc": "polymer lint --npm *.js",
+    "lint": "npm run lint:html && npm run lint:wc",
+    "test": "npm run lint && npm run test:polymer:local",
+    "test:polymer:local": "polymer test --npm --skip-plugin sauce",
+    "test:polymer:sauce": "polymer test --npm --skip-plugin local"
   },
   "author": "D2L Corporation",
   "license": "Apache-2.0",
@@ -23,6 +26,7 @@
     "eslint": "^4.15.0",
     "eslint-config-brightspace": "^0.4.0",
     "eslint-plugin-html": "^4.0.1",
+    "polymer-cli": "^1.7.7",
     "wct-browser-legacy": "^0.0.1-pre.11"
   },
   "version": "1.0.0",
