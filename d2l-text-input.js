@@ -29,6 +29,7 @@ $_documentContainer.innerHTML = `<dom-module id="d2l-text-input">
 			}
 
 			input {
+				position: relative;
 				font-family: inherit;
 				@apply --d2l-input;
 			}
