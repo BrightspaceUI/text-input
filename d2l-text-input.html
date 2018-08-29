@@ -231,6 +231,12 @@ Polymer-based web component for D2L text inputs
 					notify: true
 				}
 			},
+			ready: function() {
+				this.$$('input').addEventListener('invalid', this._handleInvalid.bind(this));
+			},
+			_handleInvalid: function(e) {
+				e.preventDefault();
+			},
 			_handleChange: function() {
 				if (Polymer.Element) {
 					// This custom focus event is only needed for Polymer 1. We should
