@@ -231,8 +231,13 @@ Polymer-based web component for D2L text inputs
 					notify: true
 				}
 			},
-			ready: function() {
-				this.$$('input').addEventListener('invalid', this._handleInvalid.bind(this));
+			attached: function() {
+				Polymer.RenderStatus.afterNextRender(this, function() {
+					this.$$('input').addEventListener('invalid', this._handleInvalid);
+				}.bind(this));
+			},
+			detached: function() {
+				this.$$('input').removeEventListener('invalid', this._handleInvalid);
 			},
 			_handleInvalid: function(e) {
 				e.preventDefault();
