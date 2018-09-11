@@ -1,3 +1,5 @@
+> Deprecated: use [BrightspaceUI/inputs](https://github.com/BrightspaceUI/inputs) `d2l-input-text` web component instead.
+
 # d2l-text-input
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/BrightspaceUI/text-input)
 [![Bower version][bower-image]][bower-url]
